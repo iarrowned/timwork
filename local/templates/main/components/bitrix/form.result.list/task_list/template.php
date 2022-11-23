@@ -224,168 +224,22 @@ function Form_Filter_Click_<?=$arResult["filter_id"]?>()
 </form>
 <br />
 
-<?
-if ($arParams["can_delete_some"])
-{
-?>
-<SCRIPT LANGUAGE="JavaScript">
-<!--
-function OnDelete_<?=$arResult["filter_id"]?>()
-{
-	var show_conf;
-	var arCheckbox = document.forms['rform_<?=$arResult["filter_id"]?>'].elements["ARR_RESULT[]"];
-	if(!arCheckbox) return;
-	if(arCheckbox.length>0 || arCheckbox.value>0)
-	{
-		show_conf = false;
-		if (arCheckbox.value>0 && arCheckbox.checked) show_conf = true;
-		else
-		{
-			for(i=0; i<arCheckbox.length; i++)
-			{
-				if (arCheckbox[i].checked)
-				{
-					show_conf = true;
-					break;
-				}
-			}
-		}
-		if (show_conf)
-			return confirm("<?=GetMessage("FORM_DELETE_CONFIRMATION")?>");
-		else
-			alert('<?=GetMessage("FORM_SELECT_RESULTS")?>');
-	}
-	return false;
-}
-
-function OnSelectAll_<?=$arResult["filter_id"]?>(fl)
-{
-	var arCheckbox = document.forms['rform_<?=$arResult["filter_id"]?>'].elements["ARR_RESULT[]"];
-	if(!arCheckbox) return;
-	if(arCheckbox.length>0)
-		for(i=0; i<arCheckbox.length; i++)
-			arCheckbox[i].checked = fl;
-	else
-		arCheckbox.checked = fl;
-}
-//-->
-</SCRIPT>
-<?
-} //endif($can_delete_some);
-
+<?php
 if ($arResult["FORM_ERROR"] <> '') ShowError($arResult["FORM_ERROR"]);
 if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 ?>
-<p>
-<b><a href="<?=$arParams["NEW_URL"]?><?=$arParams["SEF_MODE"] != "Y" ? (mb_strpos($arParams["NEW_URL"], "?") === false ? "?" : "&")."WEB_FORM_ID=".$arParams["WEB_FORM_ID"] : ""?>"><?=GetMessage("FORM_ADD")?>&nbsp;&nbsp;&gt;&gt;</a></b>
-</p>
+
 <form name="rform_<?=$arResult["filter_id"]?>" method="post" action="<?=POST_FORM_ACTION_URI?>#nav_start">
 	<input type="hidden" name="WEB_FORM_ID" value="<?=$arParams["WEB_FORM_ID"]?>" />
 	<?=bitrix_sessid_post()?>
-
-	<?
-	if ($arParams["can_delete_some"])
-	{
-	?>
-	<p><input type="submit" name="delete" value="<?=GetMessage("FORM_DELETE_SELECTED")?>" onClick="return OnDelete_<?=$arResult["filter_id"]?>()"  /></p>
-	<?
-	} // endif($can_delete_some);
-	?>
-
-	<?
-	if ($arResult["res_counter"] > 0 && $arParams["SHOW_STATUS"] == "Y" && $arParams["F_RIGHT"] >= 15)
-	{
-	?>
-	<p><input type="submit" name="save" value="<?=GetMessage("FORM_SAVE")?>" /><input type="hidden" name="save" value="Y" />&nbsp;<input type="reset" value="<?=GetMessage("FORM_RESET")?>" /></p>
-	<?
-	} //endif(intval($res_counter)>0 && $SHOW_STATUS=="Y" && $F_RIGHT>=15);
-	?>
 	<p>
-	<?=$arResult["pager"]?>
+	    <?=$arResult["pager"]?>
 	</p>
 	<table class="form-table data-table">
 		<thead>
 			<tr>
-				<th>
-					<table class="form-results-header-inline">
-						<tr>
-							<th>
-							<?
-							if ($arParams["can_delete_some"])
-							{
-							?>
-							<input type="checkbox" name="selectall" value="Y" onclick="OnSelectAll_<?=$arResult["filter_id"]?>(this.checked)" />&nbsp;
-							<?
-							} //endif ($can_delete_some);
-							?>ID<?
-							if ($arParams["SHOW_STATUS"]!="Y")
-							{
-								?><br /><?=SortingEx("s_id")?><?
-							} //endif($SHOW_STATUS!="Y");?></th>
-							<?
-							if ($arParams["SHOW_STATUS"]=="Y")
-							{
-							?>
-							<td><?=SortingEx("s_id")?></td>
-							<?
-							} //endif($SHOW_STATUS=="Y");
-							?>
-						</tr>
-						<?
-						if ($arParams["SHOW_STATUS"]=="Y")
-						{
-						?>
-						<tr>
-							<th><?=GetMessage("FORM_STATUS")?></th>
-							<td><?=SortingEx("s_status")?></td>
-						</tr>
-						<?
-						} //endif($SHOW_STATUS=="Y");
-						?>
-					</table>
-				</th>
 				<th><?=GetMessage("FORM_TIMESTAMP")?><br /><?=SortingEx("s_timestamp")?></th>
-				<?
-				if ($arParams["F_RIGHT"] >= 25)
-				{
-				?>
-				<th>
-					<table class="form-results-header-inline">
-						<?
-						if ($arParams["isStatisticIncluded"])
-						{
-						?>
-						<tr>
-							<th><?=GetMessage("FORM_USER")?></th>
-							<td><?=SortingEx("s_user_id")?></td>
-						</tr>
-						<tr>
-							<th><?=GetMessage("FORM_GUEST_ID")?></th>
-							<td><?=SortingEx("s_guest_id")?></td>
-						</tr>
-						<tr>
-							<th><?=GetMessage("FORM_SESSION_ID")?></th>
-							<td><?=SortingEx("s_session_id")?></td>
-						</tr>
-						<?
-						}
-						else
-						{?>
-						<tr>
-							<td><?=GetMessage("FORM_USER")?></td>
-						</tr>
-						<tr>
-							<td><?=SortingEx("s_user_id")?></td>
-						</tr>
-						<?
-						} //endif(isStatisticIncluded);
-						?>
-					</table>
-				</th>
-				<?
-				} //endif;($F_RIGHT>=25)
-				?>
-				<?
+				<?php
 				$colspan = 4;
 				if (is_array($arResult["arrColumns"]))
 				{
@@ -402,9 +256,7 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 								if ($arParams["F_RIGHT"] >= 25)
 								{
 								?>
-					[<a title="<?=GetMessage("FORM_FIELD_PARAMS")?>" href="/bitrix/admin/form_field_edit.php?lang=<?=LANGUAGE_ID?>&ID=<?=$arrCol["ID"]?>&FORM_ID=<?=$arParams["WEB_FORM_ID"]?>&WEB_FORM_ID=<?=$arParams["WEB_FORM_ID"]?>&additional=<?=$arrCol["ADDITIONAL"]?>"><?=$arrCol["ID"]?></a>]<br /><?
-								}//endif($F_RIGHT>=25);
-								?>
+					<? }//endif($F_RIGHT>=25);?>
 								<?=$arrCol["RESULTS_TABLE_TITLE"]?>
 				</th><?
 							} //endif(($arrCol["ADDITIONAL"]=="Y" && $SHOW_ADDITIONAL=="Y") || $arrCol["ADDITIONAL"]!="Y");
@@ -414,12 +266,10 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 				?>
 			</tr>
 		</thead>
+
+
 		<? if(count($arResult["arrResults"]) > 0): ?>
-
-
-
 			<tbody>
-
 			<?php $j=0;
 			foreach ($arResult["arrResults"] as $arRes):
                 $j++;
@@ -454,70 +304,8 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 				</tr>
 			<?php endif; ?>
 				<tr>
-                    <!-- кнопки удалить изменить и тд -->
-					<td>
-						<?php if ($arRes["can_edit"]): ?>
-                            <?php if (trim($arParams["EDIT_URL"]) <> ''):
-                                    $href = $arParams["SEF_MODE"] == "Y" ?
-                                        str_replace("#RESULT_ID#", $arRes["ID"], $arParams["EDIT_URL"])
-                                        : $arParams["EDIT_URL"].(mb_strpos($arParams["EDIT_URL"], "?") === false ? "?" : "&")
-                                        . "RESULT_ID=".$arRes["ID"]."&WEB_FORM_ID=".$arParams["WEB_FORM_ID"]; ?>
-                                    [&nbsp;<a title="<?=GetMessage("FORM_EDIT_ALT")?>" href="<?=$href?>"><?=GetMessage("FORM_EDIT")?></a>&nbsp;]<br />
-                            <?php endif; ?>
-						<?php endif; ?>
-
-						<?php if ($arRes["can_view"]): ?>
-                            <?php if (trim($arParams["VIEW_URL"]) <> ''):
-                                    $href = $arParams["SEF_MODE"] == "Y" ?
-                                        str_replace("#RESULT_ID#", $arRes["ID"], $arParams["VIEW_URL"])
-                                        : $arParams["VIEW_URL"].(mb_strpos($arParams["VIEW_URL"], "?") === false ? "?" : "&")
-                                        . "RESULT_ID=".$arRes["ID"] . "&WEB_FORM_ID=".$arParams["WEB_FORM_ID"]; ?>
-                            [&nbsp;<a title="<?=GetMessage("FORM_VIEW_ALT")?>" href="<?=$href?>"><?=GetMessage("FORM_VIEW")?></a>&nbsp;]<br />
-                            <?php endif; ?>
-						<?php endif; ?>
-						<?php if ($arRes["can_delete"]):
-							$href = $arParams["LIST_URL"] . (mb_strpos($arParams["LIST_URL"], "?") === false ? "?" : "&")
-                                . ($arParams["SEF_MODE"] == "Y" ? "" : "WEB_FORM_ID=".$arParams["WEB_FORM_ID"]."&")
-                                ."del_id=".$arRes["ID"]."&".bitrix_sessid_get()."#nav_start"; ?>
-						    [&nbsp;<a title="<?=GetMessage("FORM_DELETE_ALT")?>" href="javascript:if(confirm('<?=GetMessage("FORM_CONFIRM_DELETE")?>')) window.location='<?=$href?>'"><?=GetMessage("FORM_DELETE")?></a>&nbsp;]<br />
-						<?php endif; ?>
-				    </td>
-
 				    <td><?=$arRes["TSX_0"]?><br /><?=$arRes["TSX_1"]?></td>
 
-				<?php if ($arParams["F_RIGHT"] >= 25): ?>
-                        <!-- создатель -->
-				    <td>
-                        <?php if ($arRes["USER_ID"]>0):
-						$userName = array(
-                                "NAME" => $arRes["USER_FIRST_NAME"],
-                            "LAST_NAME" => $arRes["USER_LAST_NAME"],
-                            "SECOND_NAME" => $arRes["USER_SECOND_NAME"],
-                            "LOGIN" => $arRes["LOGIN"]
-                        ); ?>
-						[<a title="<?=GetMessage("FORM_EDIT_USER")?>"
-                            href="/bitrix/admin/user_edit.php?lang=<?=LANGUAGE_ID?>&ID=<?=$arRes["USER_ID"]?>">
-                            <?=$arRes["USER_ID"]?>
-                        </a>]
-                            (<?=$arRes["LOGIN"]?>)
-                            <?=CUser::FormatName($arParams["NAME_TEMPLATE"], $userName)?>
-						<?php if($arRes["USER_AUTH"]=="N"): ?>
-							<?=GetMessage("FORM_NOT_AUTH")?>
-                        <?php endif; ?>
-					<?php else: ?>
-						<?=GetMessage("FORM_NOT_REGISTERED")?>
-                    <?php endif; ?>
-
-					<?php if ($arParams["isStatisticIncluded"]): ?>
-						<?php if (intval($arRes["STAT_GUEST_ID"])>0):?>
-							[<a title="<?=GetMessage("FORM_GUEST")?>" href="/bitrix/admin/guest_list.php?lang=<?=LANGUAGE_ID?>&find_id=<?=$arRes["STAT_GUEST_ID"]?>&set_filter=Y"><?=$arRes["STAT_GUEST_ID"]?></a>]
-						<?php endif; ?>
-						<?php if (intval($arRes["STAT_SESSION_ID"])>0):?>
-							(<a title="<?=GetMessage("FORM_SESSION")?>" href="/bitrix/admin/session_list.php?lang=<?=LANGUAGE_ID?>&find_id=<?=$arRes["STAT_SESSION_ID"]?>&set_filter=Y"><?=$arRes["STAT_SESSION_ID"]?></a>)
-						<?php endif; ?>
-					<?php endif; ?>
-				</td>
-				<?php endif; ?>
 				<?php foreach ($arResult["arrColumns"] as $FIELD_ID => $arrC): ?>
 				<?php if (!is_array($arParams["arrNOT_SHOW_TABLE"]) || !in_array($arrC["SID"], $arParams["arrNOT_SHOW_TABLE"])): ?>
 						<?php if (($arrC["ADDITIONAL"]=="Y" && $arParams["SHOW_ADDITIONAL"]=="Y") || $arrC["ADDITIONAL"]!="Y"):?>
@@ -552,42 +340,16 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 			</tr>
 			<?php endforeach;?>
 			</tbody>
-
-
-
 		<?php endif; ?>
-		<?
-		if ($arParams["HIDE_TOTAL"]!="Y")
-		{
-		?>
+
+		<?php if ($arParams["HIDE_TOTAL"]!="Y"):?>
 		<tfoot>
 			<tr>
 				<th colspan="<?=$colspan?>"><?=GetMessage("FORM_TOTAL")?>&nbsp;<?=$arResult["res_counter"]?></th>
 			</tr>
 		</tfoot>
-		<?
-		} //endif ($HIDE_TOTAL!="Y");
-		?>
+		<?php endif; ?>
 	</table>
 
 	<p><?=$arResult["pager"]?></p>
-	<?
-	if (intval($arResult["res_counter"])>0 && $arParams["SHOW_STATUS"]=="Y" && $arParams["F_RIGHT"] >= 15)
-	{
-	?>
-	<p>
-	<input type="submit" name="save" value="<?=GetMessage("FORM_SAVE")?>" /><input type="hidden" name="save" value="Y" />&nbsp;<input type="reset" value="<?=GetMessage("FORM_RESET")?>" />
-	</p>
-	<?
-	} //endif (intval($res_counter)>0 && $SHOW_STATUS=="Y" && $F_RIGHT>=15);
-	?>
-
-	<?
-	if ($arParams["can_delete_some"])
-	{
-	?>
-	<p><input type="submit" name="delete" value="<?=GetMessage("FORM_DELETE_SELECTED")?>" onClick="return OnDelete_<?=$arResult["filter_id"]?>()" /></p>
-	<?
-	} //endif ($can_delete_some);
-	?>
 </form>
