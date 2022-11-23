@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+:focus, :active {
+    outline: none;
+}
+
+a:focus, a:active {
+    outline: none;
+}
+
+nav, footer, header, aside {
+    display: block;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+    font-family: inherit;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+a, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: 400;
+}
+
+li {
+    list-style: none;
+}
+a{
+    color: #000;
+}
+.container{
+    min-width: 320px;
+    margin: 0 auto;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.task-form {
+
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input::placeholder {
+    font-weight: normal;
+}
+.form input {
+    height: 50px;
+    margin-bottom: 15px;
+    border: 0.5px solid;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.form textarea {
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 0.5px solid;
+    font-weight: bold;
+
+}
+
+.form button {
+    width: 200px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+main {
+    margin-top: 150px;
+}
+.container {
+    width: 1260px;
+    margin: 0 auto;
+    text-align: center;
+}
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.action-link {
+    height: 71px;
+    width: 195px;
+    border: 1px solid;
+}
+
+.task-list-personal {
+    margin-top: 50px;
+    border: 1px solid;
+    width: 100%;
+}
+.task-list-personal tr {
+    height: 50px;
+}
+.task-list-personal tr:first-child {
+    border-bottom: 2px solid;
+    height: 40px;
+}
+
+.task-list-personal tr th:first-child {
+    width: 10%;
+    border-right: 1px solid;
+}
+
+.task-list-personal tr td:first-child {
+    width: 10%;
+    border-right: 1px solid;
+}
+
+.task-list-personal tr td:nth-child(2) {
+    width: 30%;
+    border-right: 1px solid;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    border: 1px solid;
+
+}
