@@ -9,7 +9,7 @@ global $USER;
             <?=bitrix_sessid_post()?>
             <input type="hidden" name="WEB_FORM_ID" value="1">
             <input type="hidden" name="web_form_submit" value="Y">
-            <input type="text" autocomplete="off" disabled name="form_text_1" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
+            <input type="text" autocomplete="off" name="form_text_1" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
             <input type="text" autocomplete="off" name="form_text_2" placeholder="Место проведения работ">
             <input type="text" autocomplete="off" name="form_text_3" placeholder="Отдел">
             <input type="tel" autocomplete="off" name="form_text_4" placeholder="Телефон">
