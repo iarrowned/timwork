@@ -38,7 +38,7 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
 		</thead>
 
 
-		<? if(count($arResult["arrResults"]) > 0): ?>
+		<?php if(count($arResult["arrResults"]) > 0): ?>
 			<tbody>
 			<?php $j=0;
 			foreach ($arResult["arrResults"] as $arRes):

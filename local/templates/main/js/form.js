@@ -25,7 +25,8 @@ setTimeout(() => {
                     function ajaxSend () {
                         postData(postUrl, data).then(data => {
                             if (data.ok === false) {
-                                console.log('error');
+                                console.log('ERROR');
+                                console.log(data);
                                 // error
                                 if ($submitButton) {
                                     $submitButton.classList.remove('is-loading');
@@ -35,7 +36,8 @@ setTimeout(() => {
 
                             } else {
                                 // success
-                                console.log('success');
+                                console.log('OK');
+                                console.log(data);
                                 if ($submitButton) {
                                     $submitButton.classList.remove('is-loading');
                                 }

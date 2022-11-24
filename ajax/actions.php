@@ -11,6 +11,8 @@ $action = $request->get('action');
 
 switch ($action) {
     case 'update_result':
-        FormTool::updateFormResult($request);
+        $return = FormTool::updateFormResult($request);
         break;
 }
+
+return json_decode($return);

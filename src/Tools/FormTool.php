@@ -9,7 +9,7 @@ class FormTool
 {
     public static function updateFormResult(Request $request) {
         Loader::includeModule('form');
-
+        $success = false;
         $resultId = $request->get('result_id');
         $values = [
             "form_text_1" => $request->get('form_text_1'),
@@ -26,6 +26,14 @@ class FormTool
             'N',
             'N'
         );
-        dump($res);
+        if ($res) {
+            $success = true;
+        }
+
+        $response = new \Bitrix\Main\Engine\Response\Json([
+            'ok' => $success,
+        ]);
+        $response->send();
+        return true;
     }
 }

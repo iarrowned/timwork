@@ -14,7 +14,7 @@ $arAnswer = CFormResult::GetDataByID(
     $arAnswer2);
 ?>
 <div class="task-form">
-    <form action="/ajax/actions.php?action=update_result&result_id=<?= $id ?>" method="post" class="form">
+    <form action="/ajax/actions.php?action=update_result&result_id=<?= $id ?>" method="post" class="form my_form">
         <?=bitrix_sessid_post()?>
         <input type="hidden" name="WEB_FORM_ID" value="1">
         <input type="hidden" name="web_form_submit" value="Y">
