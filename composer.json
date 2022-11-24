@@ -2,7 +2,7 @@
     "name": "kirill/test",
     "autoload": {
         "psr-4": {
-            "Kirill\\Test\\": "src/"
+            "Tools\\": "src/"
         }
     },
     "authors": [
