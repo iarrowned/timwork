@@ -1,6 +1,6 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-dump($arResult["arrAnswers"]);
+dump($arResult["arrResults"]);
 
 ?>
 
@@ -34,11 +34,12 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
                         <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
+                <th>Действия</th>
 			</tr>
 		</thead>
 
 
-		<? if(count($arResult["arrResults"]) > 0): ?>
+		<?php if(count($arResult["arrResults"]) > 0): ?>
 			<tbody>
 			<?php $j=0;
 			foreach ($arResult["arrResults"] as $arRes):
@@ -77,6 +78,12 @@ if ($arResult["FORM_NOTE"] <> '') ShowNote($arResult["FORM_NOTE"]);
                             <?php endif;?>
                         <?php endif;?>
                     <?php endforeach;?>
+                    <td>
+                        <ul>
+                            <li><a href="/user/work/task.php?ID=<?= $arRes['ID']?>">Редактировать</a></li>
+                            <li>Закрыть</li>
+                        </ul>
+                    </td>
 			    </tr>
 			<?php endforeach;?>
 			</tbody>

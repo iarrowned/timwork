@@ -168,3 +168,19 @@ main {
     width: 30%;
     border-right: 1px solid;
 }
+
+header {
+    height: 50px;
+    width: 100%;
+    background: #e1e1e8;
+}
+
+nav.menu ul {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+
+nav.menu ul li a{
+    font-weight: bold;
+}
