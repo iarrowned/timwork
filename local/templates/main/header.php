@@ -24,8 +24,8 @@ use Bitrix\Main\Page\Asset;
     <div class="container">
         <nav class="menu">
             <ul>
-                <li><a href="/user/work/new/">Новая заявка</a></li>
-                <li><a href="/user/work/list/">Список заявок</a></li>
+                <li><a href="/user/new.php">Новая заявка</a></li>
+                <li><a href="/user/list.php">Список заявок</a></li>
             </ul>
         </nav>
     </div>
