@@ -2,6 +2,9 @@
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Server;
+use Tools\HighloadTool;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/src/Tools/HighloadTool.php';
 
 /**
  * Class FormComponent
@@ -27,54 +30,53 @@ class FormComponent extends \CBitrixComponent
 
         $request = $this->context->getRequest();
 
-        $this->arResult['TEST'] = 'TEST';
-
-
         if ($request->isPost() && $request->get('FORM')) {
             $APPLICATION->RestartBuffer();
             $this->postData = $request->getPostList()['FORM'];
             $this->postData = $this->processingData($this->postData);
-            if (!$this->postData) {
-                $this->errorOccasion(['К сожалению мы не смогли обработать ваше обращение. Попробуйте обратиться позже']);
-            }
-            $this->filePostData = $request->getFileList()['UF_FILE'];
-            $this->files = $this->filePostData ? $this->prepareFiles($this->filePostData) : null;
 
-            if (!$APPLICATION->CaptchaCheckCode($this->postData['CAPTCHA_WORD'], $this->postData['CAPTCHA_SID'])) {
-                $this->arResult['ERROR'][] = 'Неверно указан текст с картинки';
-                $this->arResult['ERROR']['CAPTCHA_ERROR'] = 'Неверно указан текст с картинки';
-            }
-            $requiredError = $this->checkRequired($this->postData);
 
-            if (!empty($requiredError)) {
-                $this->arResult['ERROR'] = isset($this->arResult['ERROR']) ? array_merge($this->arResult['ERROR'], $requiredError) : $requiredError;
-            }
-
-            if ($this->arResult['ERROR']) {
-                if ($this->anchor === 'hotline') {
-                    $this->updateHotlineContacsFields();
-                }
-
-                $this->errorOccasion($this->arResult['ERROR']);
-            }
-
-            if (!$form = $this->getForm($this->postData['GUID'])) {
-                if ($this->anchor === 'hotline') {
-                    $this->updateHotlineContacsFields();
-                }
+            if (!$res = $this->insertData($this->postData)) {
                 $this->errorOccasion(['К сожалению произошла системная ошибка. Ваше сообщение не было зафиксировано']);
             }
 
-            $fields = $this->processingFields($form['ID']);
-            if (!$res = $this->insertData($fields)) {
-                $this->errorOccasion(['К сожалению произошла системная ошибка. Ваше сообщение не было зафиксировано']);
-            }
-
-
-
+            $entity = HighloadTool::getTaskEntity();
+            $preparedFields = HighloadTool::prepareFields($res);
+            $this->arResult['PREPARED'] = $preparedFields;
+            $r = $entity::add($preparedFields);
+            $this->arResult['RESULT'] = $r;
         }
 
         $this->includeComponentTemplate();
+    }
+
+    private function insertData(array $fields)
+    {
+        if (!$fields['USER_PHONE']) {
+            $fields['USER_PHONE'] = '(не указан)';
+        }
+
+        if (!$fields['USER_NAME']) {
+            $fields['USER_NAME'] = '(не указано)';
+        }
+
+        if (!$fields['USER_EMAIL']) {
+            $fields['USER_EMAIL'] = '(не указан)';
+        }
+
+        if (!$fields['USER_MESSAGE']) {
+            $fields['USER_MESSAGE'] = '-';
+        }
+
+        if (!$fields['DEPART']) {
+            $fields['DEPART'] = '-';
+        }
+
+        if (!$fields['LOCATION']) {
+            $fields['LOCATION'] = '-';
+        }
+
+        return $fields;
     }
 
     public function errorOccasion($error): void
