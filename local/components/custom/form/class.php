@@ -75,7 +75,9 @@ class FormComponent extends \CBitrixComponent
         if (!$fields['LOCATION']) {
             $fields['LOCATION'] = '-';
         }
-
+        if (!$fields['USER_ID']) {
+            $fields['USER_ID'] = '-';
+        }
         return $fields;
     }
 

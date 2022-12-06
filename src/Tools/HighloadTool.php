@@ -21,7 +21,8 @@ class HighloadTool
             'UF_USER_EMAIL' => $data['USER_EMAIL'],
             'UF_USER_MESSAGE' => $data['USER_MESSAGE'],
             'UF_LOCATION' => $data['LOCATION'],
-            'UF_DEPART' => $data['DEPART']
+            'UF_DEPART' => $data['DEPART'],
+            'UF_USER_ID' => $data['USER_ID'],
         ];
 
         return $preparedData;

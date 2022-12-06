@@ -27,8 +27,8 @@ $FORM = $this->__component->processingData($FORM);
             $APPLICATION->RestartBuffer();
         }
     ?>
-    <?php dump($arResult) ?>
     <form action="" method="post" class="form my_form">
+        <input type="hidden" name="FORM[USER_ID]" value="<?= $USER->GetID() ?>">
         <input type="text" autocomplete="off" name="FORM[USER_NAME]" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
         <input type="text" autocomplete="off" name="FORM[LOCATION]" placeholder="Место проведения работ">
         <input type="text" autocomplete="off" name="FORM[DEPART]" placeholder="Отдел">
