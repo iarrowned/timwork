@@ -26,7 +26,6 @@ use Bitrix\Main\Page\Asset;
             <ul>
                 <li><a href="/user/work/new/">Новая заявка</a></li>
                 <li><a href="/user/work/list/">Список заявок</a></li>
-
             </ul>
         </nav>
     </div>

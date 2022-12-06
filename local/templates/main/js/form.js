@@ -1,74 +1,23 @@
+const form = document.querySelector('.my_form');
+const formContainer = document.querySelector('.js-form-container');
 function postData (url = '', data = {}) {
     return fetch(url, {
         method: 'post',
         body: data
-    })
-        .then(response => response);
+    }).then(response => response.text());
 }
-const formService = document.querySelector('#main-form');
-setTimeout(() => {
-    const forms = document.querySelectorAll('.my_form');
-    forms.forEach((form) => {
-        if (form) {
-            const formInputs = form.querySelectorAll('input');
-            const textarea = form.querySelector('textarea');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const $form = e.target;
-                const $submitButton = $form.querySelector('button[type=submit]');
 
-                if (true) {
-                    const postUrl = $form.getAttribute('action');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let formData = new FormData;
+    const inputs = form.querySelectorAll('input');
+    const textarea = form.querySelector('textarea');
+    inputs.forEach((i) => {
+        formData.append(i.name, i.value);
+    });
+    formData.append(textarea.name, textarea.value);
 
-                    const data = new FormData($form);
-
-                    function ajaxSend () {
-                        postData(postUrl, data).then(data => {
-                            if (data.ok === false) {
-                                console.log('ERROR');
-                                console.log(data);
-                                // error
-                                if ($submitButton) {
-                                    $submitButton.classList.remove('is-loading');
-                                }
-                                $form.classList.add('is-success');
-
-
-                            } else {
-                                // success
-                                console.log('OK');
-                                console.log(data);
-                                if ($submitButton) {
-                                    $submitButton.classList.remove('is-loading');
-                                }
-                                $form.classList.add('is-success');
-
-
-                                [...formInputs].forEach(input => {
-                                    if (input.type !== 'submit') {
-                                        input.value = '';
-                                    } else {
-                                        input.value = 'Отправлено';
-                                        input.style.backgroundColor = 'green';
-                                    }
-                                });
-                                if (textarea) {
-                                    textarea.value = '';
-                                }
-
-                            }
-
-
-                        });
-                    }
-                    ajaxSend();
-
-                } else {
-                    // error
-                }
-
-                return false;
-            });
-        }
-    })
-}, 2000);
+    postData('', formData).then((resp) => {
+        formContainer.innerHTML = resp;
+    });
+});
