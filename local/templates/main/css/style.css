@@ -184,3 +184,44 @@ nav.menu ul {
 nav.menu ul li a{
     font-weight: bold;
 }
+
+.task-list-container {
+    margin-top: 50px;
+}
+.task-list {
+    border: 1px solid;
+    width: 100%;
+}
+.task-list tr th {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    height: 40px;
+}
+
+.task-list tr th:last-child {
+    border-right: none;
+}
+
+.task-list tr td {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    height: 70px;
+}
+
+.task-list tr td:last-child {
+    border-right: none;
+}
+
+.task-list tr:last-child td {
+    border-bottom: none;
+}
+
+.table-action-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-action-container a {
+    color: #218BC3;
+    padding-bottom: 5px;
+}
