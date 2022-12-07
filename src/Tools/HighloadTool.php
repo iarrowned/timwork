@@ -10,10 +10,36 @@ class HighloadTool
 
     const TASK_HL_CODE = 'UserTasks';
     const STATUSES_HL_CODE = 'Statuses';
+    const DEPARTS_HL_CODE = 'Departs';
 
     public static function getTaskEntity() {
         Loader::includeModule("highloadblock");
         return HighloadBlockTable::compileEntity(self::TASK_HL_CODE)->getDataClass();
+    }
+
+    public static function getDepartsEntity() {
+        Loader::includeModule("highloadblock");
+        return HighloadBlockTable::compileEntity(self::DEPARTS_HL_CODE)->getDataClass();
+    }
+
+    public static function getDeparts() {
+        $entity = self::getDepartsEntity();
+        $departs = $entity::getList([
+            "select" => array("*"),
+            "order" => array("ID" => "ASC"),
+            "filter" => array()
+        ])->fetchAll();
+
+        return $departs;
+    }
+
+    public static function getDepartById($id) {
+        $entity = self::getDepartsEntity();
+        return $entity::getList([
+            "select" => array("*"),
+            "order" => array("ID" => "ASC"),
+            "filter" => array('ID' => $id)
+        ])->fetch();
     }
 
     public static function getStatusesEntity() {

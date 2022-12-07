@@ -46,6 +46,7 @@ class FormComponent extends \CBitrixComponent
             $this->arResult['RESULT'] = $r;
         }
         $this->arResult['STATUSES'] = HighloadTool::getStatuses();
+        $this->arResult['DEPARTS'] = HighloadTool::getDeparts();
 
         $this->includeComponentTemplate();
     }
