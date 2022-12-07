@@ -30,6 +30,11 @@ $FORM = $this->__component->processingData($FORM);
     <form action="" method="post" class="form my_form">
         <input type="hidden" name="FORM[USER_ID]" value="<?= $USER->GetID() ?>">
         <input type="text" autocomplete="off" name="FORM[USER_NAME]" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
+        <select name="FORM[UF_STATUS]" class="form-select">
+            <?php foreach ($arResult['STATUSES'] as $status): ?>
+                <option value="<?= $status['ID'] ?>"><?= $status['UF_STATUS'] ?></option>
+            <?php endforeach; ?>
+        </select>
         <input type="text" autocomplete="off" name="FORM[LOCATION]" placeholder="Место проведения работ">
         <input type="text" autocomplete="off" name="FORM[DEPART]" placeholder="Отдел">
         <input type="tel" autocomplete="off" name="FORM[USER_PHONE]" placeholder="Телефон">

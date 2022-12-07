@@ -35,7 +35,6 @@ class FormComponent extends \CBitrixComponent
             $this->postData = $request->getPostList()['FORM'];
             $this->postData = $this->processingData($this->postData);
 
-
             if (!$res = $this->insertData($this->postData)) {
                 $this->errorOccasion(['К сожалению произошла системная ошибка. Ваше сообщение не было зафиксировано']);
             }
@@ -46,6 +45,7 @@ class FormComponent extends \CBitrixComponent
             $r = $entity::add($preparedFields);
             $this->arResult['RESULT'] = $r;
         }
+        $this->arResult['STATUSES'] = HighloadTool::getStatuses();
 
         $this->includeComponentTemplate();
     }
@@ -77,6 +77,9 @@ class FormComponent extends \CBitrixComponent
         }
         if (!$fields['USER_ID']) {
             $fields['USER_ID'] = '-';
+        }
+        if (!$fields['UF_STATUS']) {
+            $fields['UF_STATUS'] = '1';
         }
         return $fields;
     }

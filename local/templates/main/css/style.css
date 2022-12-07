@@ -225,3 +225,10 @@ nav.menu ul li a{
     color: #218BC3;
     padding-bottom: 5px;
 }
+
+.form-select {
+    height: 50px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}

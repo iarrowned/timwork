@@ -13,6 +13,7 @@ class TaskListComponent extends \CBitrixComponent
     private $entity;
     private $userId;
     private $taskList;
+    private $statuses;
 
     public function onPrepareComponentParams($arParams)
     {
@@ -33,8 +34,18 @@ class TaskListComponent extends \CBitrixComponent
             "filter" => array('UF_USER_ID' => $this->userId)
         ])->fetchAll();
 
+        $this->statuses = HighloadTool::getStatuses();
+        foreach ($this->taskList as &$task) {
+            if ($task['UF_STATUS']) {
+                $statusName = HighloadTool::getStatusById($task['UF_STATUS']);
+                $task['STATUS_NAME'] = $statusName['UF_STATUS'];
+            }
+        }
+        unset($task);
+
 
         $this->arResult['TASKS'] = $this->taskList;
+        $this->arResult['STATUSES'] = $this->statuses;
 
         $this->includeComponentTemplate();
     }

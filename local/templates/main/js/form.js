@@ -11,11 +11,13 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     let formData = new FormData;
     const inputs = form.querySelectorAll('input');
+    const select = form.querySelector('select');
     const textarea = form.querySelector('textarea');
     inputs.forEach((i) => {
         formData.append(i.name, i.value);
     });
     formData.append(textarea.name, textarea.value);
+    formData.append(select.name, select.value);
 
     postData('', formData).then((resp) => {
         formContainer.innerHTML = resp;

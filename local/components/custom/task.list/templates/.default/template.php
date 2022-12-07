@@ -11,11 +11,13 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+dump($arResult['TASKS']);
 ?>
 <div class="container task-list-container">
     <table class="task-list">
         <tr class="table-title">
             <th>ID</th>
+            <th>Статус</th>
             <th>Имя</th>
             <th>Телефон</th>
             <th>Email</th>
@@ -27,6 +29,7 @@ $this->setFrameMode(true);
         <?php foreach ($arResult['TASKS'] as $task): ?>
             <tr>
                 <td><?= $task['ID']?></td>
+                <td><?= $task['STATUS_NAME'];?></td>
                 <td><?= $task['UF_USER_NAME']?></td>
                 <td><?= $task['UF_USER_PHONE']?></td>
                 <td><?= $task['UF_USER_EMAIL']?></td>
