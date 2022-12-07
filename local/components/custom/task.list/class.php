@@ -38,7 +38,9 @@ class TaskListComponent extends \CBitrixComponent
         foreach ($this->taskList as &$task) {
             if ($task['UF_STATUS']) {
                 $statusName = HighloadTool::getStatusById($task['UF_STATUS']);
+                $departName = HighloadTool::getDepartById($task['UF_DEPART']);
                 $task['STATUS_NAME'] = $statusName['UF_STATUS'];
+                $task['DEPART_NAME'] = $departName['UF_DEPART_NAME'];
             }
         }
         unset($task);

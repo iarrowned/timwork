@@ -34,7 +34,7 @@ dump($arResult['TASKS']);
                 <td><?= $task['UF_USER_PHONE']?></td>
                 <td><?= $task['UF_USER_EMAIL']?></td>
                 <td><?= $task['UF_LOCATION']?></td>
-                <td><?= $task['UF_DEPART']?></td>
+                <td><?= $task['DEPART_NAME']?></td>
                 <td><?= $task['UF_USER_MESSAGE']?></td>
                 <td class="table-actions">
                     <dif class="table-action-container">

@@ -41,6 +41,7 @@ class TaskDetailComponent extends \CBitrixComponent
 
 
         $this->arResult = $this->task;
+        $this->arResult['DEPART_NAME'] = HighloadTool::getDepartById($this->arResult['UF_DEPART'])['UF_DEPART_NAME'];
 
         $this->includeComponentTemplate();
     }
