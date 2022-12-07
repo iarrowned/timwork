@@ -1,5 +1,6 @@
 <?php
 use Bitrix\Main\Page\Asset;
+global $USER;
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -26,6 +27,7 @@ use Bitrix\Main\Page\Asset;
             <ul>
                 <li><a href="/user/new.php">Новая заявка</a></li>
                 <li><a href="/user/list.php">Список заявок</a></li>
+                <li><a href="/user/index.php"><?= $USER->IsAuthorized() ? 'Профиль' : 'Войти в систему' ?></a></li>
             </ul>
         </nav>
     </div>
