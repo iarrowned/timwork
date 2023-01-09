@@ -82,4 +82,13 @@ class HighloadTool
 
         return $preparedData;
     }
+
+    public static function closeTask($id) {
+        $entity = self::getTaskEntity();
+        $entity::update($id, [
+            'UF_STATUS' => 3
+        ]);
+
+        return true;
+    }
 }

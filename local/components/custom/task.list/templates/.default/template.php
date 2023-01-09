@@ -11,10 +11,17 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-dump($arResult['TASKS']);
+
+$request = Bitrix\Main\Context::getCurrent()->getRequest();
+
 ?>
 <div class="container task-list-container">
     <table class="task-list">
+        <?php
+        if ($request->isPost()) {
+            $APPLICATION->RestartBuffer();
+        }
+        ?>
         <tr class="table-title">
             <th>ID</th>
             <th>Статус</th>
@@ -26,6 +33,7 @@ dump($arResult['TASKS']);
             <th>Комментарий</th>
             <th>Действия</th>
         </tr>
+
         <?php foreach ($arResult['TASKS'] as $task): ?>
             <tr>
                 <td><?= $task['ID']?></td>
@@ -37,14 +45,17 @@ dump($arResult['TASKS']);
                 <td><?= $task['DEPART_NAME']?></td>
                 <td><?= $task['UF_USER_MESSAGE']?></td>
                 <td class="table-actions">
-                    <dif class="table-action-container">
+                    <div class="table-action-container">
+                        <?php if ((int)$task['UF_STATUS'] !== 3): ?>
                         <a href="#">Редактировать</a>
-                        <a href="#">Закрыть</a>
+                        <a href="?id=<?= $task['ID'] ?>" data-id="<?= $task['ID'] ?>" class="close-task__btn">Закрыть</a>
+                        <?php endif; ?>
                         <a href="/user/detail.php?id=<?= $task['ID'] ?>">Просмотр</a>
-                    </dif>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
+        <?php if ($request->isPost()):die(); ?><?php endif; ?>
     </table>
 </div>
 

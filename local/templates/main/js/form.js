@@ -7,22 +7,41 @@ function postData (url = '', data = {}) {
     }).then(response => response.text());
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let formData = new FormData;
-    const inputs = form.querySelectorAll('input');
-    const select = form.querySelectorAll('select');
-    select.forEach((i) => {
-        formData.append(i.name, i.value);
-    });
-    const textarea = form.querySelector('textarea');
-    inputs.forEach((i) => {
-        formData.append(i.name, i.value);
-    });
-    formData.append(textarea.name, textarea.value);
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let formData = new FormData;
+        const inputs = form.querySelectorAll('input');
+        const select = form.querySelectorAll('select');
+        select.forEach((i) => {
+            formData.append(i.name, i.value);
+        });
+        const textarea = form.querySelector('textarea');
+        inputs.forEach((i) => {
+            formData.append(i.name, i.value);
+        });
+        formData.append(textarea.name, textarea.value);
 
 
-    postData('', formData).then((resp) => {
-        formContainer.innerHTML = resp;
+        postData('', formData).then((resp) => {
+            formContainer.innerHTML = resp;
+        });
     });
-});
+}
+
+
+const closeBtn = document.querySelectorAll('.close-task__btn');
+
+closeBtn.forEach((i) => {
+    i.addEventListener('click', (e) => {
+
+        const taskId = e.target.dataset.id;
+        postData('', {
+            action: 'close',
+            id: taskId
+        }).then((r) => {
+            console.log(r);
+            document.querySelector('.task-list').innerHTML = r;
+        });
+    });
+})

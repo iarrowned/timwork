@@ -39,12 +39,20 @@ class TaskListComponent extends \CBitrixComponent
             if ($task['UF_STATUS']) {
                 $statusName = HighloadTool::getStatusById($task['UF_STATUS']);
                 $departName = HighloadTool::getDepartById($task['UF_DEPART']);
-                $task['STATUS_NAME'] = $statusName['UF_STATUS'];
-                $task['DEPART_NAME'] = $departName['UF_DEPART_NAME'];
+                $task['STATUS_NAME'] = $statusName['UF_NAME'];
+                $task['DEPART_NAME'] = $departName['UF_NAME'];
             }
         }
         unset($task);
 
+
+
+
+        if ($this->request->isPost()) {
+            HighloadTool::closeTask($this->request->get('id'));
+            $APPLICATION->RestartBuffer();
+
+        }
 
         $this->arResult['TASKS'] = $this->taskList;
         $this->arResult['STATUSES'] = $this->statuses;
