@@ -31,25 +31,40 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
             <th>Место</th>
             <th>Отдел</th>
             <th>Комментарий</th>
+            <th>Исполнитель</th>
             <th>Действия</th>
         </tr>
 
         <?php foreach ($arResult['TASKS'] as $task): ?>
             <tr>
-                <td><?= $task['ID']?></td>
-                <td><?= $task['STATUS_NAME'];?></td>
+                <td class="task-id"><?= $task['ID']?></td>
+                <td>
+                    <select name="status" id="">
+                        <?php foreach ($arResult['STATUSES'] as $status): ?>
+                            <option value="<?= $status['ID'] ?>" <?= $status['ID'] == $task['UF_STATUS'] ? 'selected' : '' ?>><?= $status['UF_NAME'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
                 <td><?= $task['UF_USER_NAME']?></td>
                 <td><?= $task['UF_USER_PHONE']?></td>
                 <td><?= $task['UF_USER_EMAIL']?></td>
                 <td><?= $task['UF_LOCATION']?></td>
                 <td><?= $task['DEPART_NAME']?></td>
                 <td><?= $task['UF_USER_MESSAGE']?></td>
+                <td>
+                    <select name="worker" id="">
+                        <?php foreach($arResult['ADMINS'] as $admin): ?>
+                            <option value="<?= $admin['ID'] ?>" <?= $admin['ID'] === $task['UF_WORKER_ID'] ? 'selected' : '' ?>><?= $admin['NAME'] . ' ' . $admin['LAST_NAME']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
                 <td class="table-actions">
                     <div class="table-action-container">
                         <?php if ((int)$task['UF_STATUS'] !== 3): ?>
-                        <a href="#">Редактировать</a>
-                        <a href="?id=<?= $task['ID'] ?>" data-id="<?= $task['ID'] ?>" class="close-task__btn">Закрыть</a>
+                            <a href="#">Редактировать</a>
+                            <a href="?id=<?= $task['ID'] ?>" data-id="<?= $task['ID'] ?>" class="close-task__btn">Закрыть</a>
                         <?php endif; ?>
+                        <a href="/ajax/actions.php" data-id="<?= $task['ID'] ?>" class="save-task__btn">Сохранить</a>
                         <a href="/user/detail.php?id=<?= $task['ID'] ?>">Просмотр</a>
                     </div>
                 </td>

@@ -1,7 +1,6 @@
 <?php
 
 use Bitrix\Main\Application;
-use Bitrix\Main\Server;
 use Tools\HighloadTool;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/src/Tools/HighloadTool.php';
@@ -9,13 +8,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/src/Tools/HighloadTool.php';
 /**
  * Class FormComponent
  */
-class FormComponent extends \CBitrixComponent
+class FormEditComponent extends \CBitrixComponent
 {
 
     /**
      * @var Bitrix\Main\Context
      */
     private $context;
+    private $taskId;
 
     public function onPrepareComponentParams($arParams)
     {
@@ -29,6 +29,8 @@ class FormComponent extends \CBitrixComponent
         $this->context = Application::getInstance()->getContext();
 
         $request = $this->context->getRequest();
+        $this->taskId = $this->arParams['TASK_ID'];
+        $this->arResult['DATA'] = null;
 
         if ($request->isPost() && $request->get('FORM')) {
             $APPLICATION->RestartBuffer();
@@ -42,15 +44,11 @@ class FormComponent extends \CBitrixComponent
             $entity = HighloadTool::getTaskEntity();
             $preparedFields = HighloadTool::prepareFields($res);
             $this->arResult['PREPARED'] = $preparedFields;
-            $r = $entity::add($preparedFields);
+            $r = $entity::update($this->taskId, $preparedFields);
             $this->arResult['RESULT'] = $r;
         }
         $this->arResult['STATUSES'] = HighloadTool::getStatuses();
         $this->arResult['DEPARTS'] = HighloadTool::getDeparts();
-
-        if ($this->arParams['TASK_ID']) {
-
-        }
 
         $this->includeComponentTemplate();
     }
@@ -108,3 +106,4 @@ class FormComponent extends \CBitrixComponent
     }
 
 }
+
