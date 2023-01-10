@@ -13,18 +13,18 @@ if (!$USER->IsAuthorized()) {
 }
 
 $request = Context::getCurrent()->getRequest();
-$tastId = $request->get('id');
-if (!$tastId) {
+$taskId = $request->get('id');
+if (!$taskId) {
     die("Invalid id");
 }
 ?>
 
 <?php
 $APPLICATION->IncludeComponent(
-    'custom:form.edit',
+    'custom:form',
     '',
     [
-        'TASK_ID' => $tastId,
+        'TASK_ID' => $taskId,
     ]
 );
 ?>

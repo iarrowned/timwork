@@ -48,6 +48,10 @@ class FormComponent extends \CBitrixComponent
         $this->arResult['STATUSES'] = HighloadTool::getStatuses();
         $this->arResult['DEPARTS'] = HighloadTool::getDeparts();
 
+        if ($this->arParams['TASK_ID']) {
+
+        }
+
         $this->includeComponentTemplate();
     }
 
