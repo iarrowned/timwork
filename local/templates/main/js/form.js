@@ -21,10 +21,19 @@ if (form) {
             formData.append(i.name, i.value);
         });
         formData.append(textarea.name, textarea.value);
+        formData.append("action", "new");
 
-
-        postData('', formData).then((resp) => {
-            formContainer.innerHTML = resp;
+        postData('/ajax/actions.php', formData).then((resp) => {
+            const successBlock = document.querySelector('.success-from p');
+            if (JSON.parse(resp).success === true) {
+                form.style.display = "none";
+                successBlock.innerHTML = "Ваша заявка успешно отправлена.";
+                successBlock.parentNode.style.display = "block";
+            } else {
+                successBlock.innerHTML = "Во время исполнения запроса возникла ошибка.";
+                successBlock.parentNode.style.display = "block";
+                successBlock.parentNode.style.color = "red";
+            }
         });
     });
 }
@@ -58,12 +67,14 @@ if (saveTaskBtn) {
             const taskId = currentRow.querySelector('.task-id').innerHTML;
             const workerId = currentRow.querySelector('select[name="worker"]').value;
             const statusId = currentRow.querySelector('select[name="status"]').value;
+            const userMessage = currentRow.querySelector('textarea[name="user_message"]').value;
             const action = 'update';
             let data = new FormData;
             data.append('task_id', taskId);
             data.append('worker_id', workerId);
             data.append('status_id', statusId);
-            data.append('action', action);+
+            data.append('action', action);
+            data.append('message', userMessage);
             postData('/ajax/actions.php', data).then((response) => {
                 location.reload();
             });

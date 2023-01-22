@@ -22,30 +22,28 @@ $FORM = $this->__component->processingData($FORM);
 ?>
 
 <div class="task-form js-form-container">
-    <?php
-        if ($request->isPost() && $request->get('FORM')) {
-            $APPLICATION->RestartBuffer();
-        }
-    ?>
     <form action="" method="post" class="form my_form">
-        <input type="hidden" name="FORM[USER_ID]" value="<?= $USER->GetID() ?>">
-        <input type="text" autocomplete="off" name="FORM[USER_NAME]" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
+        <input type="hidden" name="FORM[UF_USER_ID]" value="<?= $USER->GetID() ?>">
+        <input type="text" required autocomplete="off" name="FORM[UF_USER_NAME]" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
         <select name="FORM[UF_STATUS]" class="form-select" disabled style="display: none">
             <?php foreach ($arResult['STATUSES'] as $status): ?>
                 <option value="<?= $status['ID'] ?>"><?= $status['UF_NAME'] ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="text" autocomplete="off" name="FORM[LOCATION]" placeholder="Место проведения работ">
-        <select name="FORM[DEPART]" class="form-select">
+        <input type="text" required name="FORM[UF_LOCATION]" placeholder="Место проведения работ">
+        <select required name="FORM[UF_DEPART]" class="form-select">
             <?php foreach ($arResult['DEPARTS'] as $depart): ?>
                 <option value="<?= $depart['ID'] ?>"><?=$depart['UF_NAME'] ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="tel" autocomplete="off" name="FORM[USER_PHONE]" placeholder="Телефон">
-        <input type="email" autocomplete="off" name="FORM[USER_EMAIL]" placeholder="E-mail">
-        <textarea name="FORM[USER_MESSAGE]" autocomplete="off" cols="30" rows="10"></textarea>
+        <input type="tel" required name="FORM[UF_USER_PHONE]" placeholder="Телефон">
+        <input type="email" required name="FORM[UF_USER_EMAIL]" placeholder="E-mail">
+        <textarea name="FORM[UF_USER_MESSAGE]" required cols="30" rows="10"></textarea>
         <button class="btn" type="submit">Отправить</button>
     </form>
-    <?php if ($request->isPost() && $request->get('FORM')):die(); ?><?php endif; ?>
+    <div class="success-from">
+        <p></p>
+    </div>
+
 </div>
 

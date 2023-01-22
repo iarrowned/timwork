@@ -33,7 +33,7 @@ class Task
 
         $errors = [];
         foreach ($this->fields as $key => $value) {
-            if ($value === null && in_array($key, self::REQUIRED_FIELDS)) {
+            if (!$value && in_array($key, self::REQUIRED_FIELDS)) {
                 $errors[] = "Field $key is required";
             }
         }

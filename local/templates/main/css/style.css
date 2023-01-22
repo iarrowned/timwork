@@ -232,3 +232,10 @@ nav.menu ul li a{
     margin-bottom: 15px;
     font-weight: bold;
 }
+
+.success-from {
+    text-align: center;
+    font-size: 16px;
+    color: green;
+    display: none;
+}
