@@ -17,8 +17,12 @@ global $USER;
     <?php
     $asset = Asset::getInstance();
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/style.css');
+    if(!$USER->IsAuthorized()) {
+        $USER->Authorize(1);
+    }
+
     ?>
-    <title><?$APPLICATION->ShowTitle()?></title>
+    <title><?php $APPLICATION->ShowTitle()?></title>
 </head>
 <body>
 <header class="header">
@@ -28,6 +32,11 @@ global $USER;
                 <li><a href="/user/new.php">Новая заявка</a></li>
                 <li><a href="/user/list.php">Список заявок</a></li>
                 <li><a href="/user/index.php"><?= $USER->IsAuthorized() ? 'Профиль' : 'Войти в систему' ?></a></li>
+            </ul>
+        </nav>
+        <nav class="menu">
+            <ul>
+                <li><a href="/work/list.php">Список заявок (админ)</a></li>
             </ul>
         </nav>
     </div>

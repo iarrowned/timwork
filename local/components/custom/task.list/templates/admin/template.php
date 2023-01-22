@@ -50,7 +50,9 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 <td><?= $task['UF_USER_EMAIL']?></td>
                 <td><?= $task['UF_LOCATION']?></td>
                 <td><?= $task['DEPART_NAME']?></td>
-                <td><?= $task['UF_USER_MESSAGE']?></td>
+                <td>
+                    <textarea name="user_message" id="" cols="30" rows="10"><?= $task['UF_USER_MESSAGE']?></textarea>
+                </td>
                 <td>
                     <select name="worker" id="">
                         <?php foreach($arResult['ADMINS'] as $admin): ?>
@@ -60,10 +62,6 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 </td>
                 <td class="table-actions">
                     <div class="table-action-container">
-                        <?php if ((int)$task['UF_STATUS'] !== 3): ?>
-                            <a href="#">Редактировать</a>
-                            <a href="?id=<?= $task['ID'] ?>" data-id="<?= $task['ID'] ?>" class="close-task__btn">Закрыть</a>
-                        <?php endif; ?>
                         <a href="/ajax/actions.php" data-id="<?= $task['ID'] ?>" class="save-task__btn">Сохранить</a>
                         <a href="/user/detail.php?id=<?= $task['ID'] ?>">Просмотр</a>
                     </div>
