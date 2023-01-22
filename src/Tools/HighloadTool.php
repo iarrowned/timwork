@@ -11,10 +11,16 @@ class HighloadTool
     const TASK_HL_CODE = 'UserTasks';
     const STATUSES_HL_CODE = 'Statuses';
     const DEPARTS_HL_CODE = 'Departs';
+    const REGISTER_HL_CODE = 'Register';
 
     public static function getTaskEntity() {
         Loader::includeModule("highloadblock");
         return HighloadBlockTable::compileEntity(self::TASK_HL_CODE)->getDataClass();
+    }
+
+    public static function getRegisterEntity() {
+        Loader::includeModule("highloadblock");
+        return HighloadBlockTable::compileEntity(self::REGISTER_HL_CODE)->getDataClass();
     }
 
     public static function getDepartsEntity() {
