@@ -83,3 +83,26 @@ if (saveTaskBtn) {
 }
 
 
+const registerForm = document.querySelector('.form-register');
+const test = document.querySelector('.test');
+
+if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let formData = new FormData(e.target);
+        postData('/ajax/actions.php', formData)
+            .then((resp) => {
+                const successBlock = document.querySelector('.success-from p');
+                if (JSON.parse(resp).success === true) {
+                    form.style.display = "none";
+                    successBlock.innerHTML = "Ваша заявка успешно отправлена.";
+                    successBlock.parentNode.style.display = "block";
+                } else {
+                    successBlock.innerHTML = "Во время исполнения запроса возникла ошибка.";
+                    successBlock.parentNode.style.display = "block";
+                    successBlock.parentNode.style.color = "red";
+                }
+        });
+    });
+}
+
