@@ -70,6 +70,7 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
             <th>Комментарий</th>
             <th class="worker">Исполнитель</th>
             <th>Действия</th>
+            <th>Завершено</th>
         </tr>
 
         <?php foreach ($arResult['TASKS'] as $task): ?>
@@ -88,10 +89,10 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 <td><?= $task['UF_LOCATION']?></td>
                 <td><?= $task['DEPART_NAME']?></td>
                 <td>
-                    <textarea name="user_message" id="" cols="30" rows="10"><?= $task['UF_USER_MESSAGE']?></textarea>
+                    <textarea class="textarea" name="user_message" id="" cols="30" rows="10" disabled><?= $task['UF_USER_MESSAGE']?></textarea>
                 </td>
                 <td class="worker">
-                    <select name="worker" id="" <?= $USER->GetGroups() !== "1" ? 'disabled' : '' ?>>
+                    <select name="worker" id="" <?= in_array("1", $USER->GetUserGroupArray()) ? '' : 'disabled' ?>>
                         <option value="">Не назначен</option>
                         <?php foreach($arResult['ADMINS'] as $admin): ?>
                             <option value="<?= $admin['ID'] ?>" <?= $admin['ID'] === $task['UF_WORKER_ID'] ? 'selected' : '' ?>><?= $admin['NAME'] . ' ' . $admin['LAST_NAME']?></option>
@@ -104,6 +105,7 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                         <a href="/user/detail.php?id=<?= $task['ID'] ?>">Просмотр</a>
                     </div>
                 </td>
+                <td><?= $task['UF_CLOSE_TIME'] ?: '--'?></td>
             </tr>
         <?php endforeach; ?>
         <?php if ($request->isPost()):die(); ?><?php endif; ?>

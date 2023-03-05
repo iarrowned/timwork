@@ -21,6 +21,7 @@ if ($action === 'update') {
     $result = $entity::update($taskId, [
         'UF_WORKER_ID' => $request->getPost('worker_id'),
         'UF_STATUS' => $request->getPost('status_id'),
+        'UF_CLOSE_TIME' => null
     ]);
     die(json_encode($result));
 }

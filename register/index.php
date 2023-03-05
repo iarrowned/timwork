@@ -12,12 +12,6 @@ $departs = HighloadTool::getDeparts();
             <input type="text" required name="UF_FIO" placeholder="Ваше ФИО">
             <input type="email" required name="UF_EMAIL" placeholder="Ваш email">
             <input type="tel" required name="UF_PHONE" placeholder="Ваш телефон">
-            <label for="depart-field">Подразделение</label>
-            <select name="UF_DEPART" id="depart-field">
-                <?php foreach ($departs as $depart): ?>
-                    <option value="<?= $depart['ID'] ?>"><?=$depart['UF_NAME'] ?></option>
-                <?php endforeach; ?>
-            </select>
             <button class="btn" type="submit">Отправить</button>
         </form>
         <div class="success-from">

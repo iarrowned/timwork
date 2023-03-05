@@ -36,6 +36,10 @@ class TaskListComponent extends \CBitrixComponent
             $this->arResult['STATUSES'] = $this->getStatuses();
         }
 
+        if (!in_array("1", $USER->GetUserGroupArray())) {
+            $filter['UF_WORKER_ID'] = $this->userId;
+        }
+
         $this->taskList = $this->entity::getList([
             "select" => array("*"),
             "order" => array("ID" => "ASC"),

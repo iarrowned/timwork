@@ -14,7 +14,6 @@ class Register
         'UF_FIO',
         'UF_EMAIL',
         'UF_PHONE',
-        'UF_DEPART',
     ];
     public function __construct(array $fields)
     {

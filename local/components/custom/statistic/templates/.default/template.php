@@ -13,10 +13,41 @@
 $this->setFrameMode(true);
 
 $data = [
-    ['Год', 'Завершено', 'В работе'],
-    ['2022', 110, 3],
-    ['2023', 13, 5],
+    ['Год', 'Завершено'],
 ];
+$tasks = \Tools\HighloadTool::getTaskEntity()::getList([
+        'select' => ['*', 'MONTH'],
+        'order' => ['UF_CLOSE_TIME' => 'ASC'],
+        'filter' => ['UF_STATUS' => 3],
+        'runtime' => [
+                new Bitrix\Main\Entity\ExpressionField('MONTH', 'MONTH(UF_CLOSE_TIME)')
+        ],
+])->fetchAll();
+$months = [];
+foreach ($tasks as $task) {
+    if(!$months[$task['MONTH']]) {
+        $months[$task['MONTH']] = 1;
+    } else {
+        $months[$task['MONTH']]++;
+    }
+}
+$mNames = [
+        1 => 'Январь',
+        2 => 'Февраль',
+        3 => 'Март',
+        4 => 'Апрель',
+        5 => 'Май',
+        6 => 'Июнь',
+        7 => 'Июль',
+        8 => 'Август',
+        9 => 'Сентябрь',
+        0 => 'Октябрь',
+        11 => 'Ноябрь',
+        12 => 'Декабрь',
+];
+foreach ($months as $month => $count) {
+    $data[] = [$mNames[$month], (int)$count];
+}
 ?>
 <script>
     let arData = <?= json_encode($data) ?>;
