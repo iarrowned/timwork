@@ -15,6 +15,44 @@ $this->setFrameMode(true);
 $request = Bitrix\Main\Context::getCurrent()->getRequest();
 
 ?>
+<style>
+
+    .task-list tr {
+        height: 40px !important;
+    }
+    table {
+        font-size: 12px;
+    }
+    .textarea {
+        height: 40px !important;
+        width: 250px;
+        font-size: 12px;
+    }
+    .status-row select {
+        width: 85px !important;
+        height: 43px !important;
+        padding: 0 !important;
+    }
+    .worker select {
+        height: 43px;
+    }
+    .name-row {
+        width: 125px;
+    }
+    .ready_s {
+        background: #5aff00;
+    }
+    .progress_s {
+        background: #ff6c0d;
+    }
+    .block_s {
+        background: #3b17ae;
+        color: #fff;
+    }
+    .new_s {
+        background: #fff579;
+    }
+</style>
 <div class="container task-list-container">
     <table class="task-list">
         <?php
@@ -23,23 +61,22 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
         }
         ?>
         <tr class="table-title">
-            <th>ID</th>
-            <th>Статус</th>
-            <th>Имя</th>
+            <th class="status-row">Статус</th>
+            <th class="name-row">Имя</th>
             <th>Телефон</th>
             <th>Email</th>
             <th>Место</th>
             <th>Отдел</th>
             <th>Комментарий</th>
-            <th>Исполнитель</th>
+            <th class="worker">Исполнитель</th>
             <th>Действия</th>
         </tr>
 
         <?php foreach ($arResult['TASKS'] as $task): ?>
             <tr>
-                <td class="task-id"><?= $task['ID']?></td>
-                <td>
-                    <select name="status" id="">
+                <td class="task-id" style="display: none;"><?= $task['ID']?></td>
+                <td class="status-row">
+                    <select name="status" id="" class="<?= \Tools\HighloadTool::STATUSES[$task['UF_STATUS']] ?>">
                         <?php foreach ($arResult['STATUSES'] as $status): ?>
                             <option value="<?= $status['ID'] ?>" <?= $status['ID'] == $task['UF_STATUS'] ? 'selected' : '' ?>><?= $status['UF_NAME'] ?></option>
                         <?php endforeach; ?>
@@ -53,8 +90,9 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 <td>
                     <textarea name="user_message" id="" cols="30" rows="10"><?= $task['UF_USER_MESSAGE']?></textarea>
                 </td>
-                <td>
-                    <select name="worker" id="">
+                <td class="worker">
+                    <select name="worker" id="" <?= $USER->GetGroups() !== "1" ? 'disabled' : '' ?>>
+                        <option value="">Не назначен</option>
                         <?php foreach($arResult['ADMINS'] as $admin): ?>
                             <option value="<?= $admin['ID'] ?>" <?= $admin['ID'] === $task['UF_WORKER_ID'] ? 'selected' : '' ?>><?= $admin['NAME'] . ' ' . $admin['LAST_NAME']?></option>
                         <?php endforeach; ?>
