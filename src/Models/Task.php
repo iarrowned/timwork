@@ -2,6 +2,7 @@
 
 namespace Tools;
 
+use Bitrix\Main\Entity\UpdateResult;
 use Bitrix\Main\Loader;
 use Tools\HighloadTool;
 
@@ -110,6 +111,15 @@ class Task
         }
 
         return true;
+    }
+
+    public static function closeTask(int $id)
+    {
+        $entity = HighloadTool::getTaskEntity();
+        return $entity::update($id, [
+            'UF_STATUS' => 3,
+            'UF_CLOSE_TIME' => date('d.m.Y H:i:s')
+        ]);
     }
 
 }

@@ -15,10 +15,12 @@ $action = $request->getPost('action');
 if ($action === 'update') {
     $entity = HighloadTool::getTaskEntity();
     $taskId = $request->getPost('task_id');
+    if ($request->getPost('status_id') == 3) {
+        return json_encode(Task::closeTask($taskId));
+    }
     $result = $entity::update($taskId, [
         'UF_WORKER_ID' => $request->getPost('worker_id'),
         'UF_STATUS' => $request->getPost('status_id'),
-        'UF_USER_MESSAGE' => $request->getPost('message'),
     ]);
     die(json_encode($result));
 }

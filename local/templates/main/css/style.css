@@ -193,6 +193,9 @@ nav.menu ul li a{
     border: 1px solid;
     width: 100%;
 }
+.task-list tr {
+    height: 40px !important;
+}
 .task-list tr th {
     border-bottom: 1px solid;
     border-right: 1px solid;
@@ -206,7 +209,7 @@ nav.menu ul li a{
 .task-list tr td {
     border-bottom: 1px solid;
     border-right: 1px solid;
-    height: 70px;
+    height: 40px;
 }
 
 .task-list tr td:last-child {

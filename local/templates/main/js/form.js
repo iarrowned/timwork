@@ -67,14 +67,12 @@ if (saveTaskBtn) {
             const taskId = currentRow.querySelector('.task-id').innerHTML;
             const workerId = currentRow.querySelector('select[name="worker"]').value;
             const statusId = currentRow.querySelector('select[name="status"]').value;
-            const userMessage = currentRow.querySelector('textarea[name="user_message"]').value;
             const action = 'update';
             let data = new FormData;
             data.append('task_id', taskId);
             data.append('worker_id', workerId);
             data.append('status_id', statusId);
             data.append('action', action);
-            data.append('message', userMessage);
             postData('/ajax/actions.php', data).then((response) => {
                 location.reload();
             });

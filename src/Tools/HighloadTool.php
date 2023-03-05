@@ -7,6 +7,12 @@ use Bitrix\Main\Loader;
 
 class HighloadTool
 {
+    const STATUSES = [
+        1 => 'new_s',
+        2 => 'progress_s',
+        3 => 'ready_s',
+        4 => 'block_s'
+        ];
 
     const TASK_HL_CODE = 'UserTasks';
     const STATUSES_HL_CODE = 'Statuses';
