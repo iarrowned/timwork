@@ -290,3 +290,38 @@ nav.menu ul li a{
 .menu-item a:hover {
     background-color: #dfdfdf
 }
+.task-list tr {
+    height: 40px !important;
+}
+table {
+    font-size: 12px;
+}
+.textarea {
+    height: 40px !important;
+    width: 250px;
+    font-size: 12px;
+}
+.status-row select {
+    width: 85px !important;
+    height: 43px !important;
+    padding: 0 !important;
+}
+.worker select {
+    height: 43px;
+}
+.name-row {
+    width: 125px;
+}
+.ready_s {
+    background: #5aff00;
+}
+.progress_s {
+    background: #ff6c0d;
+}
+.block_s {
+    background: #3b17ae;
+    color: #fff;
+}
+.new_s {
+    background: #fff579;
+}

@@ -15,44 +15,6 @@ $this->setFrameMode(true);
 $request = Bitrix\Main\Context::getCurrent()->getRequest();
 
 ?>
-<style>
-
-    .task-list tr {
-        height: 40px !important;
-    }
-    table {
-        font-size: 12px;
-    }
-    .textarea {
-        height: 40px !important;
-        width: 250px;
-        font-size: 12px;
-    }
-    .status-row select {
-        width: 85px !important;
-        height: 43px !important;
-        padding: 0 !important;
-    }
-    .worker select {
-        height: 43px;
-    }
-    .name-row {
-        width: 125px;
-    }
-    .ready_s {
-        background: #5aff00;
-    }
-    .progress_s {
-        background: #ff6c0d;
-    }
-    .block_s {
-        background: #3b17ae;
-        color: #fff;
-    }
-    .new_s {
-        background: #fff579;
-    }
-</style>
 <div class="container task-list-container">
     <table class="task-list">
         <?php
@@ -77,7 +39,7 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
             <tr>
                 <td class="task-id" style="display: none;"><?= $task['ID']?></td>
                 <td class="status-row">
-                    <select name="status" id="" class="<?= \Tools\HighloadTool::STATUSES[$task['UF_STATUS']] ?>">
+                    <select <?= $arResult['IS_USER'] ? 'disabled' : ''?> name="status" id="" class="<?= \Tools\HighloadTool::STATUSES[$task['UF_STATUS']] ?>">
                         <?php foreach ($arResult['STATUSES'] as $status): ?>
                             <option value="<?= $status['ID'] ?>" <?= $status['ID'] == $task['UF_STATUS'] ? 'selected' : '' ?>><?= $status['UF_NAME'] ?></option>
                         <?php endforeach; ?>
@@ -101,7 +63,9 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 </td>
                 <td class="table-actions">
                     <div class="table-action-container">
-                        <a href="/ajax/actions.php" data-id="<?= $task['ID'] ?>" class="save-task__btn">Сохранить</a>
+                        <?php if(!$arResult['IS_USER']): ?>
+                            <a href="/ajax/actions.php" data-id="<?= $task['ID'] ?>" class="save-task__btn">Сохранить</a>
+                        <?php endif; ?>
                         <a href="/user/detail.php?id=<?= $task['ID'] ?>">Просмотр</a>
                     </div>
                 </td>
