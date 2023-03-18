@@ -10,7 +10,7 @@ $APPLICATION->SetTitle('Главная');
             <a href="/user/new.php">Отправить заявку в УИТ</a>
         </div>
         <div class="menu-item">
-            <a href="/user/list.php">История заявок</a>
+            <a href="/work/list.php">История заявок</a>
         </div>
         <div class="menu-item">
             <a href="/user/index.php">Данные профиля</a>

@@ -43,6 +43,10 @@ class TaskListComponent extends \CBitrixComponent
             $filter['UF_USER_ID'] = $this->userId;
             $this->arResult['IS_USER'] = true;
         }
+        if (in_array("1", $USER->GetUserGroupArray())) {
+            $filter = [];
+            $this->arResult['IS_USER'] = false;
+        }
 
         $this->taskList = $this->entity::getList([
             "select" => array("*"),
@@ -78,9 +82,11 @@ class TaskListComponent extends \CBitrixComponent
 
     public function getAdmins() {
         $filter = ['ACTIVE' => 'Y', 'GROUPS_ID' => '6'];
-        $rsUsers = CUser::GetList(($by="personal_country"), ($order="desc"), $filter, [
-            'SELECT' => ['NAME', 'ID', 'GROUPS_ID'],
-        ]);
+        $rsUsers = CUser::GetList(
+            ($by="personal_country"),
+            ($order="desc"),
+            $filter,
+            ['SELECT' => ['NAME', 'ID', 'GROUPS_ID']]);
 
         $admins = [];
         while ($user = $rsUsers->Fetch()) {

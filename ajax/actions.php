@@ -41,5 +41,20 @@ if ($action === 'register') {
     die(json_encode($result));
 }
 
+if ($action === 'add_comment') {
+    $entity = HighloadTool::getCommentsEntity();
+    $entity::add([
+        'UF_USER_ID' => $request->getPost('USER_ID'),
+        'UF_TASK_ID' => $request->getPost('TASK_ID'),
+        'UF_MESSAGE' => $request->getPost('MESSAGE')
+    ]);
+    die(json_encode(['success' => true]));
+}
+if ($action === 'delete_comment') {
+    $entity = HighloadTool::getCommentsEntity();
+    $entity::delete($request->getPost('ID'));
+    die(json_encode(['success' => true]));
+}
+
 
 ?>

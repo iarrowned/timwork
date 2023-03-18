@@ -4,6 +4,7 @@ namespace Tools;
 
 use Bitrix\Highloadblock\HighloadBlockTable;
 use Bitrix\Main\Loader;
+use CUser;
 
 class HighloadTool
 {
@@ -18,6 +19,7 @@ class HighloadTool
     const STATUSES_HL_CODE = 'Statuses';
     const DEPARTS_HL_CODE = 'Departs';
     const REGISTER_HL_CODE = 'Register';
+    const COMMENTS_HL_CODE = 'Comments';
 
     public static function getTaskEntity() {
         Loader::includeModule("highloadblock");
@@ -104,4 +106,29 @@ class HighloadTool
 
         return true;
     }
+
+    public static function getCommentsEntity() {
+        Loader::includeModule("highloadblock");
+        return HighloadBlockTable::compileEntity(self::COMMENTS_HL_CODE)->getDataClass();
+    }
+
+    public static function getComments($taskId) {
+        $entity = self::getCommentsEntity();
+        $comments = $entity::getList([
+            'select' => ['ID', 'UF_TASK_ID', 'UF_USER_ID', 'UF_MESSAGE'],
+            'filter' => ['UF_TASK_ID' => $taskId]
+        ])->fetchAll();
+        foreach ($comments as &$comment) {
+            $user = CUser::GetList(
+                ($by="personal_country"),
+                ($order="desc"),
+                ['ID' => $comment['UF_USER_ID']],
+                ['SELECT' => ['NAME', 'LAST_NAME', 'ID']])->Fetch();
+            $comment['USER_NAME'] = $user['NAME'];
+            $comment['USER_LAST_NAME'] = $user['LAST_NAME'];
+        }
+        unset($comment);
+        return $comments;
+    }
+
 }

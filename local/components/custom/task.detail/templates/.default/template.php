@@ -27,3 +27,14 @@ $this->setFrameMode(true);
     </div>
 </div>
 
+<?php
+$APPLICATION->IncludeComponent(
+        'custom:comments',
+        'list',
+    [
+            'TASK_ID' => $arResult['ID']
+    ]
+
+);
+?>
+

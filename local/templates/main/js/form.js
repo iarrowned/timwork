@@ -104,3 +104,33 @@ if (registerForm) {
     });
 }
 
+const form1 = document.querySelector('.comment-form');
+if (form1) {
+    form1.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let formData = new FormData;
+        formData.append('USER_ID', form1.querySelector('input[name="USER_ID"]').value);
+        formData.append('TASK_ID', form1.querySelector('input[name="TASK_ID"]').value);
+        formData.append('MESSAGE', form1.querySelector('textarea[name="UF_MESSAGE"]').value);
+        formData.append("action", "add_comment");
+
+        postData('/ajax/actions.php', formData).then((resp) => {
+            window.location.reload();
+        });
+    });
+}
+const dels = document.querySelectorAll('.delete-comment');
+if (dels.length) {
+    dels.forEach(i => {
+        i.addEventListener('click', (e) => {
+            e.preventDefault();
+            let formData = new FormData;
+            formData.append('ID', e.target.dataset.id);
+            formData.append("action", "delete_comment");
+
+            postData('/ajax/actions.php', formData).then((resp) => {
+                window.location.reload();
+            });
+        });
+    });
+}

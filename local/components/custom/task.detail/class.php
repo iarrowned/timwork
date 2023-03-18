@@ -36,7 +36,7 @@ class TaskDetailComponent extends \CBitrixComponent
         $this->task = $this->entity::getList([
             "select" => array("*"),
             "order" => array("ID" => "ASC"),
-            "filter" => array('ID' => $taskId, 'UF_USER_ID' => $USER->GetID())
+            "filter" => array('ID' => $taskId)
         ])->fetch();
 
 
