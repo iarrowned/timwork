@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 
 $data = [
-    ['Год', 'Завершено'],
+    ['Год', 'Завершено', 'В работе'],
 ];
 $tasks = \Tools\HighloadTool::getTaskEntity()::getList([
         'select' => ['*', 'MONTH'],
@@ -46,7 +46,7 @@ $mNames = [
         12 => 'Декабрь',
 ];
 foreach ($months as $month => $count) {
-    $data[] = [$mNames[$month], (int)$count];
+    $data[] = [$mNames[$month], (int)$count, 2];
 }
 ?>
 <script>
@@ -67,5 +67,12 @@ foreach ($months as $month => $count) {
         chart.draw(data, options);
     }
 </script>
-<div id="oil" style="width: 500px; height: 400px;"></div>
+<style>
+    #oil {
+        width: 800px;
+        height: 600px;
+        margin: 0 auto;
+    }
+</style>
+<div id="oil" style=""></div>
 
