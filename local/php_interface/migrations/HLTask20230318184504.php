@@ -3,7 +3,7 @@
 namespace Sprint\Migration;
 
 
-class HLTasksV220230318154259 extends Version
+class HLTask20230318184504 extends Version
 {
     protected $description = "";
 
@@ -413,6 +413,52 @@ class HLTasksV220230318154259 extends Version
     ),
     'USE_SECOND' => 'Y',
     'USE_TIMEZONE' => 'N',
+  ),
+  'EDIT_FORM_LABEL' => 
+  array (
+    'en' => '',
+    'ru' => '',
+  ),
+  'LIST_COLUMN_LABEL' => 
+  array (
+    'en' => '',
+    'ru' => '',
+  ),
+  'LIST_FILTER_LABEL' => 
+  array (
+    'en' => '',
+    'ru' => '',
+  ),
+  'ERROR_MESSAGE' => 
+  array (
+    'en' => '',
+    'ru' => '',
+  ),
+  'HELP_MESSAGE' => 
+  array (
+    'en' => '',
+    'ru' => '',
+  ),
+));
+            $helper->Hlblock()->saveField($hlblockId, array (
+  'FIELD_NAME' => 'UF_WORKER_ID',
+  'USER_TYPE_ID' => 'string',
+  'XML_ID' => '',
+  'SORT' => '100',
+  'MULTIPLE' => 'N',
+  'MANDATORY' => 'N',
+  'SHOW_FILTER' => 'N',
+  'SHOW_IN_LIST' => 'Y',
+  'EDIT_IN_LIST' => 'Y',
+  'IS_SEARCHABLE' => 'N',
+  'SETTINGS' => 
+  array (
+    'SIZE' => 20,
+    'ROWS' => 1,
+    'REGEXP' => '',
+    'MIN_LENGTH' => 0,
+    'MAX_LENGTH' => 0,
+    'DEFAULT_VALUE' => '',
   ),
   'EDIT_FORM_LABEL' => 
   array (

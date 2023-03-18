@@ -3,7 +3,7 @@
 namespace Sprint\Migration;
 
 
-class HLDeparts20230203163403 extends Version
+class HLDeparts20230318184514 extends Version
 {
     protected $description = "";
 
