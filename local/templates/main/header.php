@@ -1,6 +1,7 @@
 <?php
 use Bitrix\Main\Page\Asset;
 global $USER;
+$isAdmin = true;
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -18,7 +19,7 @@ global $USER;
     $asset = Asset::getInstance();
     $asset->addCss(SITE_TEMPLATE_PATH . '/css/style.css');
     if(!$USER->IsAuthorized()) {
-        $USER->Authorize(1);
+        //$USER->Authorize(1);
     }
 
     ?>
@@ -26,17 +27,14 @@ global $USER;
 </head>
 <body>
 <header class="header">
-    <div class="container">
+    <div class="container1">
         <nav class="menu">
             <ul>
+                <li><a href="/">Главная</a></li>
                 <li><a href="/user/new.php">Новая заявка</a></li>
-                <li><a href="/user/list.php">Список заявок</a></li>
+                <li><a href="<?= $isAdmin ? '/work/list.php' : '/user/list.php'?>">Список заявок</a></li>
+                <li><a href="/info/">Статистика</a></li>
                 <li><a href="/user/index.php"><?= $USER->IsAuthorized() ? 'Профиль' : 'Войти в систему' ?></a></li>
-            </ul>
-        </nav>
-        <nav class="menu">
-            <ul>
-                <li><a href="/work/list.php">Список заявок (админ)</a></li>
             </ul>
         </nav>
     </div>
