@@ -363,3 +363,19 @@ table {
     text-decoration: dotted;
     top: -20px;
 }
+
+.success-from {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 200px;
+}
+.success-from a {
+    display: inline-block;
+    font-size: 22px;
+    margin-top: 50px;
+    font-weight: normal;
+}
+textarea {
+    resize: none;
+}

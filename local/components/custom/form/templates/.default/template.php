@@ -20,7 +20,6 @@ $request = Application::getInstance()->getContext()->getRequest();
 $FORM = $request->getPostList()['FORM'];
 $FORM = $this->__component->processingData($FORM);
 ?>
-
 <div class="task-form js-form-container">
     <form action="" method="post" class="form my_form">
         <input type="hidden" name="FORM[UF_USER_ID]" value="<?= $USER->GetID() ?>">
@@ -40,6 +39,7 @@ $FORM = $this->__component->processingData($FORM);
     </form>
     <div class="success-from">
         <p></p>
+        <a href="/work/list.php">Перейти в список заявок</a>
     </div>
 
 </div>
