@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 
 global $APPLICATION;
-$APPLICATION->SetTitle("Новый раздел");
+$APPLICATION->SetPageProperty('title', 'Timwork - создать обращение');
 global $USER;
 
 if (!$USER->IsAuthorized()) {

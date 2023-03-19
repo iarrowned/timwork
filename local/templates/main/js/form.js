@@ -82,7 +82,6 @@ if (saveTaskBtn) {
 
 
 const registerForm = document.querySelector('.form-register');
-const test = document.querySelector('.test');
 
 if (registerForm) {
     registerForm.addEventListener('submit', (e) => {
@@ -92,7 +91,7 @@ if (registerForm) {
             .then((resp) => {
                 const successBlock = document.querySelector('.success-from p');
                 if (JSON.parse(resp).success === true) {
-                    form.style.display = "none";
+                    registerForm.style.display = "none";
                     successBlock.innerHTML = "Ваша заявка успешно отправлена.";
                     successBlock.parentNode.style.display = "block";
                 } else {

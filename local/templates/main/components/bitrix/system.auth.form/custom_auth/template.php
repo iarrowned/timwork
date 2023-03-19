@@ -45,6 +45,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                     <noindex><a href="<?=$arResult["AUTH_FORGOT_PASSWORD_URL"]?>" rel="nofollow"><?=GetMessage("AUTH_FORGOT_PASSWORD_2")?></a></noindex>
                 </div>
                 <input class="btn submit-btn" type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>" />
+                <a href="/register/">Регистрация</a>
         </form>
     <?php else:?>
         <form action="<?=$arResult["AUTH_URL"]?>" class="logout-form">

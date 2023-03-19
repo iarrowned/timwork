@@ -39,7 +39,6 @@ class TaskListComponent extends \CBitrixComponent
         if (in_array("6", $USER->GetUserGroupArray())) {
             $filter['UF_WORKER_ID'] = $this->userId;
         } elseif (in_array("5", $USER->GetUserGroupArray())) {
-            $filter['UF_WORKER_ID'] = null;
             $filter['UF_USER_ID'] = $this->userId;
             $this->arResult['IS_USER'] = true;
         }

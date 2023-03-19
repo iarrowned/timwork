@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 
 $data = [
-    ['Год', 'Завершено', 'В работе'],
+    ['Год', 'Завершено'],
 ];
 $tasks = \Tools\HighloadTool::getTaskEntity()::getList([
         'select' => ['*', 'MONTH'],
@@ -46,7 +46,7 @@ $mNames = [
         12 => 'Декабрь',
 ];
 foreach ($months as $month => $count) {
-    $data[] = [$mNames[$month], (int)$count, 2];
+    $data[] = [$mNames[$month], (int)$count];
 }
 ?>
 <script>

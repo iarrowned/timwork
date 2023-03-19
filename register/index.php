@@ -1,6 +1,7 @@
 <?php use Tools\HighloadTool;
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty('title', 'Timwork - регистрация');
 require($_SERVER["DOCUMENT_ROOT"] . "/src/Tools/HighloadTool.php");
 $departs = HighloadTool::getDeparts();
 ?>

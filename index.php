@@ -1,6 +1,10 @@
 <?
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
-$APPLICATION->SetTitle('Главная');
+global $APPLICATION, $USER;
+$APPLICATION->SetPageProperty('title', 'Timwork - главная');
+if (!$USER->IsAuthorized()) {
+    LocalRedirect('/user/', false, '301 Moved Permanently');
+}
 ?>
 
 <div class="container">
