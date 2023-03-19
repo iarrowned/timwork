@@ -19,7 +19,7 @@ $this->setFrameMode(true);
             <input type="hidden" name="FORM[USER_ID]" value="<?= $USER->GetID() ?>">
             <input type="text" autocomplete="off" name="FORM[USER_NAME]" disabled placeholder="Имя" value="<?= $arResult['UF_USER_NAME'] ?>">
             <input type="text" autocomplete="off" name="FORM[LOCATION]" disabled value="<?= $arResult['UF_LOCATION'] ?>" placeholder="Место проведения работ">
-            <input type="text" autocomplete="off" name="FORM[DEPART]" disabled value="<?= $arResult['DEPART_NAME'] ?>" placeholder="Отдел">
+            <input type="text" autocomplete="off" name="FORM[DEPART]" disabled value="<?= $arResult['UF_DEPART'] ?>" placeholder="Отдел">
             <input type="tel" autocomplete="off" name="FORM[USER_PHONE]" disabled value="<?= $arResult['UF_USER_PHONE'] ?>" placeholder="Телефон">
             <input type="email" autocomplete="off" name="FORM[USER_EMAIL]" disabled value="<?= $arResult['UF_USER_EMAIL'] ?>" placeholder="E-mail">
             <textarea name="FORM[USER_MESSAGE]" autocomplete="off" cols="30" rows="10" disabled><?= $arResult['UF_USER_MESSAGE'] ?></textarea>

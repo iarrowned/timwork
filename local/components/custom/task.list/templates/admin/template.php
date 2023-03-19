@@ -49,7 +49,7 @@ $request = Bitrix\Main\Context::getCurrent()->getRequest();
                 <td><?= $task['UF_USER_PHONE']?></td>
                 <td><?= $task['UF_USER_EMAIL']?></td>
                 <td><?= $task['UF_LOCATION']?></td>
-                <td><?= $task['DEPART_NAME']?></td>
+                <td><?= $task['UF_DEPART']?></td>
                 <td>
                     <textarea class="textarea" name="user_message" id="" cols="30" rows="10" disabled><?= $task['UF_USER_MESSAGE']?></textarea>
                 </td>

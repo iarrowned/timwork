@@ -25,17 +25,14 @@ $FORM = $this->__component->processingData($FORM);
     <form action="" method="post" class="form my_form">
         <input type="hidden" name="FORM[UF_USER_ID]" value="<?= $USER->GetID() ?>">
         <input type="text" required autocomplete="off" name="FORM[UF_USER_NAME]" placeholder="Имя" value="<?= $USER->GetLastName() . ' ' . $USER->GetFirstName() ?>">
+
         <select name="FORM[UF_STATUS]" class="form-select" disabled style="display: none">
             <?php foreach ($arResult['STATUSES'] as $status): ?>
                 <option value="<?= $status['ID'] ?>"><?= $status['UF_NAME'] ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="text" required name="FORM[UF_LOCATION]" placeholder="Место проведения работ">
-        <select required name="FORM[UF_DEPART]" class="form-select">
-            <?php foreach ($arResult['DEPARTS'] as $depart): ?>
-                <option value="<?= $depart['ID'] ?>"><?=$depart['UF_NAME'] ?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" required name="FORM[UF_LOCATION]" placeholder="Место проведения работ (корпус, кафедра, кабинет)">
+        <input type="text" name="FORM[UF_DEPART]" required placeholder="Укажите своё подразделение (институт/кафедра/отдел)">
         <input type="tel" required name="FORM[UF_USER_PHONE]" placeholder="Телефон">
         <input type="email" required name="FORM[UF_USER_EMAIL]" placeholder="E-mail">
         <textarea name="FORM[UF_USER_MESSAGE]" required cols="30" rows="10"></textarea>
