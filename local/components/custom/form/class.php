@@ -86,6 +86,7 @@ class FormComponent extends \CBitrixComponent
         if (!$fields['UF_STATUS']) {
             $fields['UF_STATUS'] = '1';
         }
+        $fields['UF_START_TIME'] = date('d.m.Y H:i:s');
         return $fields;
     }
 
