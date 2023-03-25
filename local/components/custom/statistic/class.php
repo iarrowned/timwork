@@ -42,30 +42,30 @@ class Statistic extends \CBitrixComponent
         $tasks = [];
         $res = HighloadTool::getTaskEntity()::getList([
             'select' => ['ID', 'UF_START_TIME', 'UF_CLOSE_TIME', 'DIFF'],
+            'filter' => ['!UF_CLOSE_TIME' => false],
             'runtime' => [
                 new ExpressionField('DIFF', 'TIMEDIFF(UF_CLOSE_TIME, UF_START_TIME)')
-
             ]
         ]);
         while($r = $res->fetch()) {
             $tasks[] = array_map('int', explode(':', $r['DIFF']));
         }
-        $max = $tasks[0][0];
-        $min = $tasks[0][0];
+
+        $hours = [];
+        foreach ($tasks as $task) {
+            $hours[] = $task[0];
+        }
+        $max = max($hours);
+        $min = min($hours);
 
         $s = 0;
         for($i = 0, $iMax = count($tasks); $i < $iMax; $i++) {
-            if($tasks[$i][0] > $max) {
-                $max = $tasks[$i];
-            }
-            if($tasks[$i][0] < $min) {
-                $min = $tasks[$i];
-            }
             $s += $tasks[$i][0]*60*60 + $tasks[$i][1]*60 + $tasks[$i][2];
         }
+        $tmp = $s / (count($tasks));
         $tasks['MAX'] = $max;
         $tasks['MIN'] = $min;
-        $tmp = $s / (count($tasks) - 2);
+
         $h = (int)($tmp / 60 / 60);
         $tmp -= $h * 60 * 60;
         $m = (int)($tmp / 60);
