@@ -48,31 +48,85 @@ $mNames = [
 foreach ($months as $month => $count) {
     $data[] = [$mNames[$month], (int)$count];
 }
+$one = (float)$arResult['TOTAL_TASKS'];
+$ready = (int)((count($arResult['STATS'][2]['TASKS']) / $one) * 100);
+$progress = (int)((count($arResult['STATS'][1]['TASKS']) / $one) * 100);
+$block = (int)((count($arResult['STATS'][3]['TASKS']) / $one) * 100);
+$new = (int)((count($arResult['STATS'][0]['TASKS']) / $one) * 100);
+
 ?>
-<script>
-    let arData = <?= json_encode($data) ?>;
-</script>
-<script src="https://www.google.com/jsapi"></script>
-<script>
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arData);
-        var options = {
-            title: 'Статистика',
-            hAxis: {title: 'Дата'},
-            vAxis: {title: 'Кол-во'}
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById('oil'));
-        chart.draw(data, options);
-    }
-</script>
-<style>
-    #oil {
-        width: 800px;
-        height: 600px;
-        margin: 0 auto;
-    }
-</style>
-<div id="oil" style=""></div>
+<section class="stat">
+    <div class="container">
+        <h1>НЕМНОГО НАШЕЙ СТАТИСТИКИ</h1>
+        <div class="plot">
+            <div class="left">
+                Кол-во
+            </div>
+            <div class="bottom">
+                Статусы
+            </div>
+            <div class="all col" data-count="<?= 'Всего: ' . $arResult['TOTAL_TASKS'] ?>">
+                <div class="text">Всего:  <?= $arResult['TOTAL_TASKS'] ?></div>
+            </div>
+            <div class="all col" style="height: <?= $new?>%"  data-count="<?= 'Новые задачи: ' . count($arResult['STATS'][0]['TASKS']) ?>">
+                <div class="text">Новые:  <?= count($arResult['STATS'][0]['TASKS']) ?></div>
+            </div>
+            <div class="done col" style="height: <?= $ready?>%" data-count="<?= 'Завершено задач: ' . count($arResult['STATS'][2]['TASKS']) ?>">
+                <div class="text">Завершено:  <?= count($arResult['STATS'][2]['TASKS']) ?></div>
+            </div>
+            <div class="progress col" style="height: <?= $progress?>%" data-count="<?= 'В работе: ' . count($arResult['STATS'][1]['TASKS']) ?>">
+                <div class="text">Работа: <?= count($arResult['STATS'][1]['TASKS']) ?></div>
+            </div>
+            <div class="block col" style="height: <?= $block?>%" data-count="<?= 'На согласовании: ' . count($arResult['STATS'][3]['TASKS']) ?>">
+                <div class="text">Заблокирована:  <?= count($arResult['STATS'][3]['TASKS']) ?></div>
+            </div>
+        </div>
+        <div class="block_0">
+            <ul>
+                <li>ЗА ВСЕ ВРЕМЯ НАМ ПОСТУПИЛО <span class="task_total"><?= $arResult['TOTAL_TASKS'] ?> ЗАДАЧ</span>:</li>
+                <li><span class="task_done"><?= count($arResult['STATS'][2]['TASKS']) ?></span> из них мы успешно выполнили;</li>
+                <li>над <span class="task_progress"><?= count($arResult['STATS'][1]['TASKS']) ?></span> сейчас активно трудятся наши специалисты;</li>
+                <li><span class="task_block"><?= count($arResult['STATS'][3]['TASKS']) ?> задачи</span> сейчас обсуждаются с заказчиком.</li>
+            </ul>
+        </div>
+
+        <div class="block_1">
+            <div class="b1_top">
+                <p><?= $arResult['TIME_STAT']['SUM'] ?> ч.</p>
+            </div>
+            <div class="b1_bottom">
+                <p>МЫ ПОТРАТИЛИ НА ВСЕ ЗАДАЧИ</p>
+            </div>
+        </div>
+
+        <div class="block_2">
+            <div class="b2_top">
+                <p>В СРЕДНЕМ НА ЗАДАЧУ</p>
+            </div>
+            <div class="b2_bottom">
+                <p><?= $arResult['TIME_STAT']['DAYS'] ?> ДНЕЙ</p>
+            </div>
+        </div>
+
+        <div class="block_3">
+            <div class="b3_top">
+                <p>ЗА <?= $arResult['TIME_STAT']['MIN'] ?> ч.</p>
+            </div>
+            <div class="b3_bottom">
+                <p>ЗАВЕРШИЛИ САМУЮ БЫСТРУЮ НАШУ ЗАДАЧУ</p>
+            </div>
+        </div>
+
+        <div class="block_4">
+            <div class="b4_top">
+                <p>САМАЯ ДОЛГАЯ ЗАДАЧА ЗАНЯЛА У НАС</p>
+            </div>
+            <div class="b4_bottom">
+                <p><?= $arResult['TIME_STAT']['MAX'] ?> ч.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
