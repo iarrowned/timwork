@@ -83,7 +83,7 @@ body{
 }
 
 .container {
-    width: 1280px;
+    max-width: 1280px;
     margin: 0 auto;
     height: 100%;
 }
@@ -319,7 +319,8 @@ p {
 }
 
 .form_container {
-    width: 590px;
+    max-width: 590px;
+    min-width: 320px;
     height: 635px;
     margin: 0 auto;
     margin-top: 150px;

@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+:focus, :active {
+    outline: none;
+}
+
+a:focus, a:active {
+    outline: none;
+}
+
+nav, footer, header, aside {
+    display: block;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+    font-family: inherit;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+a, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: 400;
+}
+
+li {
+    list-style: none;
+}
+a{
+    color: #000;
+}
+.container{
+    min-width: 320px;
+    margin: 0 auto;
+}
+body{
+    font-family: 'Ubuntu', sans-serif;
+    height: 2500px;
+    background: rgba(191, 255, 232, 0.54);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+}
+h1 {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 40px;
+}
+p {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    text-align: center;
+}
+
+.form_container {
+    width: 590px;
+    height: 835px;
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.1), 0px 8px 53px rgba(0, 120, 240, 0.25);
+    border-radius: 10px;
+}
+.form_container .top_icon {
+    position: absolute;
+    top: -50px;
+    left: 245px;
+    width: 100px;
+    height: 100px;
+}
+.form_container h1 {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    color: rgba(0, 120, 240, 0.5);
+    padding-top: 35px;
+}
+
+.form_container p {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+    padding-top: 52px;
+}
+.form_container form {
+    padding: 0 30px;
+    margin: 0 auto;
+    margin-top: 37px;
+}
+.form_container form input, textarea {
+    width: 100%;
+    height: 34px;
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.9255px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-bottom:  1px solid rgba(0, 0, 0, 0.44);
+}
+.form_container form input::placeholder {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.9255px;
+}
+.pass_input {
+    border-bottom:  1px solid rgba(0, 0, 0, 0.44);
+}
+.input_group {
+    position: relative;
+    margin-bottom: 40px;
+}
+.input_group .textarea_input {
+    border: 1px solid rgba(0, 0, 0, 0.44);
+    width: 100%;
+    height: 180px;
+    margin-top: 20px;
+    resize: none;
+    padding-top: 5px;
+    border-radius: 10px;
+}
+.weswap-new::-webkit-scrollbar {
+    width: 10px;
+}
+
+.weswap-new::-webkit-scrollbar-track {
+    background-color:#5A5D66;
+    border-radius: 10px;
+}
+
+.weswap-new::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color:#ffc72e;
+}
+.input_group img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.show_pass:hover {
+    cursor: pointer;
+}
+.remember {
+    margin-top: 32px;
+    position: relative;
+}
+.form_container form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+.form_container form input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+.remember label {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.9255px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    top: 0px;
+    left: 30px;
+}
+.form_container form .submit-btn {
+    width: 288.09px;
+    height: 51.22px;
+    background: rgba(0, 120, 240, 0.1);
+    border: 1px solid #0078F0;
+    border-radius: 10px;
+}
+.form_container form .submit-btn:hover {
+    background: rgba(0, 120, 240, 0.3);
+    cursor: pointer;
+}
