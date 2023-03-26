@@ -116,10 +116,14 @@ class Task
     public static function closeTask(int $id)
     {
         $entity = HighloadTool::getTaskEntity();
-        return $entity::update($id, [
+        $task = $entity::getById($id)->fetch();
+        $fields = [
             'UF_STATUS' => 3,
-            'UF_CLOSE_TIME' => date('d.m.Y H:i:s')
-        ]);
+        ];
+        if(!$task['UF_CLOSE_TIME']) {
+            $fields['UF_CLOSE_TIME'] = date('d.m.Y H:i:s');
+        }
+        return $entity::update($id, $fields);
     }
 
 }
